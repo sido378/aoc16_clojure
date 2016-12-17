@@ -63,7 +63,7 @@
        (map parse-room)
        (map decrypt-room)
        (filter #(str/includes? % "northpole"))
-       ffirst))
+       first))
        
 
 (defn rotate-char [offset character]
@@ -80,7 +80,7 @@
   (->> roomName
        (map (partial rotate-char (Integer/parseInt sectorId)))
        (reduce str)
-       (vector sectorId)))
+       (assoc [roomName sectorId checksum] 0)))
 
 (solve input)
 (solvep2 input)
