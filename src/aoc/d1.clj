@@ -22,14 +22,14 @@
   (as-> input data
         (str/split data #", ")
         (map parse-step data)))
-       
+
 (defn positions [data]
  (->> 
       (map first data)
       (map (fn [x] ((get {\L dec \R inc} x) 0)))
       (reductions +)
       (map #(mod % 4))
-      (map [[0 1] [1 0 ] [0 -1] [-1 0]])
+      (map [[0 1] [1 0] [0 -1] [-1 0]])
       (map vector (map second data))
       (mapcat #(apply repeat %))
       (reductions addv [0 0])))
